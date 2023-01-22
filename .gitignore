@@ -1,0 +1,11 @@
+.gradle/
+.idea/
+*.iml
+build/
+out/
+.DS_Store
+local.properties
+lambda.properties
+infra/
+k8s/
+.history/

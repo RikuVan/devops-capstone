@@ -1,0 +1,10 @@
+{% macro tr(key) %}
+<tr>
+    <td class="align-middle"><a id="file-{{ key }}" href="/{{ key }}">{{ key }}</a></td>
+    <td class="align-middle">
+        <form method="POST" action="/{{ key }}/delete">
+            <button class="btn btn-danger">delete</button>
+        </form>
+    </td>
+</tr>
+{% endmacro %}
