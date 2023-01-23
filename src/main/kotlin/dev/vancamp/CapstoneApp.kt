@@ -1,5 +1,6 @@
 package dev.vancamp
 
+import com.sksamuel.hoplite.Pos.Companion.env
 import org.http4k.client.Java8HttpClient
 import org.http4k.cloudnative.env.Environment
 import org.http4k.cloudnative.env.EnvironmentKey
@@ -15,8 +16,8 @@ val BASIC_AUTH_CREDENTIALS = EnvironmentKey.map(String::toCredentials).required(
 val HTTP_PORT = EnvironmentKey.int().defaulted("HTTP_PORT", 8000)
 
 fun main() {
-    val env = Environment.fromResource("capstone.properties")
-    println(BASIC_AUTH_CREDENTIALS(env))
+    val env = Environment.ENV overrides Environment.fromResource("capstone.properties")
+
     PrintRequest()
         .then(ServerFilters.BasicAuth("capstone", BASIC_AUTH_CREDENTIALS(env)))
         .then(Dropbox(env, Java8HttpClient()))
