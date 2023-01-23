@@ -35,12 +35,12 @@ class FakeS3 : HttpHandler, MutableMap<S3Key, String> by mutableMapOf() {
             },
             DELETE to { req ->
                 this.remove(s3Key(req))?.let { Response(ACCEPTED) } ?: Response(NOT_FOUND)
-            }
+            },
         ),
         "/" bind GET to {
             val files = keys.joinToString("") { """<Key>${it.value}</Key>""" }
             Response(OK).body("<List>$files</List>")
-        }
+        },
     )
 
     override fun invoke(request: Request) = app(request)

@@ -25,7 +25,8 @@ class S3Error(status: Status) : Exception("S3 returned $status")
 
 data class S3Key(val value: String) {
     companion object {
-        fun parseFiles(value: String) = Regex("""Key>(.+?)</Key""").findAll(value).map { S3Key(it.groupValues[1]) }.toList()
+        fun parseFiles(value: String) =
+            Regex("""Key>(.+?)</Key""").findAll(value).map { S3Key(it.groupValues[1]) }.toList()
     }
 }
 
@@ -53,9 +54,13 @@ class S3(private val aws: HttpHandler) {
         }
 
         fun configured(env: Environment, http: HttpHandler) =
-            S3(SetBucketHost(Uri.of("https://${AWS_BUCKET(env)}.s3.amazonaws.com"))
-                .then(ClientFilters.AwsAuth(S3_CREDENTIAL_SCOPE(env), AWS_CREDENTIALS(env)))
-                .then(ensureSuccessful)
-                .then(http))
+            S3(
+                SetBucketHost(Uri.of("https://${AWS_BUCKET(env)}.s3.amazonaws.com"))
+                    .then(
+                        ClientFilters.AwsAuth(S3_CREDENTIAL_SCOPE(env), AWS_CREDENTIALS(env)),
+                    )
+                    .then(ensureSuccessful)
+                    .then(http),
+            )
     }
 }

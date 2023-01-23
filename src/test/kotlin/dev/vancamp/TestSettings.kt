@@ -10,5 +10,5 @@ import org.http4k.cloudnative.env.Environment
 val TestSettings = Environment.defaults(
     AWS_CREDENTIALS of AwsCredentials("key", "secretKey"),
     AWS_BUCKET of "mybucket",
-    S3_CREDENTIAL_SCOPE of AwsCredentialScope("us-east-1", "s3")
+    S3_CREDENTIAL_SCOPE of AwsCredentialScope("us-east-1", "s3"),
 )

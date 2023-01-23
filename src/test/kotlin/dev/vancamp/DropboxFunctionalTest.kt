@@ -21,7 +21,7 @@ import org.http4k.lens.Header.CONTENT_TYPE
 import org.http4k.lens.MultipartFormFile
 import org.junit.jupiter.api.Test
 
-class CapstoneFunctionalTest {
+class DropboxFunctionalTest {
     private val dropbox = Dropbox(TestSettings, FakeS3())
 
     @Test
@@ -65,7 +65,6 @@ class CapstoneFunctionalTest {
         assertThat(listFiles().countFiles(), equalTo(0))
     }
 
-
     private fun Response.countFiles() = bodyString().split("""id="file-""").size - 1
     private fun Response.containsFile(name: String) = bodyString().contains("""id="file-$name""")
 
@@ -76,9 +75,11 @@ class CapstoneFunctionalTest {
     private fun uploadFile(name: String, content: String) {
         val file = MultipartFormFile(name, TEXT_PLAIN, content.byteInputStream())
         val body = MultipartFormBody().plus("file" to file)
-        val upload = dropbox(Request(POST, "/")
-            .with(CONTENT_TYPE of MultipartFormWithBoundary(body.boundary))
-            .body(body))
+        val upload = dropbox(
+            Request(POST, "/")
+                .with(CONTENT_TYPE of MultipartFormWithBoundary(body.boundary))
+                .body(body),
+        )
 
         assertThat(upload, hasStatus(SEE_OTHER))
     }
