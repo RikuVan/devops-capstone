@@ -28,7 +28,6 @@ jobs:
         with:
           ktlint-version: '0.48.1'
           level: 'warning'
-          run: ./gradlew ktlint
           reporter: |
             plain,output=ktlint_report.txt
             json,output=ktlint_report.json
