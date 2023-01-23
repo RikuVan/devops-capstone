@@ -8,30 +8,31 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath 'org.jetbrains.kotlinx:kover:0.6.1'
     }
 }
 
-plugins {
-    id 'com.google.cloud.tools.jib' version '2.3.0'
-}
+apply plugin: 'application'
+apply plugin: 'kover'
 
-jib {
-    container.mainClass = "dev.vancamp.CapstoneKt"
-    to.image = 'docker_repo_user/docker_image_user'
-}
+mainClassName = "dev.vancamp.CapstoneAppKt"
 
 repositories {
     mavenCentral()
 }
 
+configurations {
+    ktlint
+}
+
 apply plugin: 'kotlin'
 
-compileKotlin.kotlinOptions.jvmTarget = "11"
-compileTestKotlin.kotlinOptions.jvmTarget = "11"
+compileKotlin.kotlinOptions.jvmTarget = "17"
+compileTestKotlin.kotlinOptions.jvmTarget = "17"
 compileTestKotlin.kotlinOptions.freeCompilerArgs += "-Xjvm-default=all"
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 test {
     useJUnitPlatform()
@@ -51,8 +52,33 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
     testImplementation "org.http4k:http4k-testing-hamkrest:${http4kVersion}"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.2"
-    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.9.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
     testImplementation "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+}
+
+dependencies {
+    ktlint("com.pinterest:ktlint:0.48.1") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, getObjects().named(Bundling, Bundling.EXTERNAL))
+        }
+    }
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args "src/**/*.kt"
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
+}
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args "-F", "src/**/*.kt"
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
 }
 

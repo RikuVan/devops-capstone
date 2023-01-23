@@ -1,0 +1,46 @@
+name: Verify
+
+on:
+  pull_request:
+    branches: [ "prod", "master" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3.9.0
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          java-package: jdk
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Build
+        id: build
+        run: ./gradlew classes testClasses
+      - name: Check Kotlin formatting rules (ktlint)
+        id: ktlint
+        run: ./gradlew ktlint
+      - name: Run tests
+        id: test
+        run: ./gradlew test
+      - name: Generate kover coverage report
+        run: ./gradlew koverXmlReport
+      - name: Add coverage report to PR
+        id: kover
+        uses: mi-kas/kover-report@v1
+        with:
+          path: ${{ github.workspace }}/build/reports/kover/xml/report.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: Code Coverage
+          update-comment: true
+          min-coverage-overall: 80
+          min-coverage-changed-files: 80
+      - name: Check steps conclusions
+        if: ${{contains(steps.*.outputs.conclusion,'failure')}}
+        run: exit 1

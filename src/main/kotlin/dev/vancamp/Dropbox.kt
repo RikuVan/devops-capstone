@@ -65,8 +65,8 @@ object Dropbox {
             routes(
                 "/{id}/delete" bind POST to Delete(s3),
                 "/{id}" bind GET to Get(s3),
-                "/" bind routes(POST to Upload(s3), GET to Index(s3))
-            )
+                "/" bind routes(POST to Upload(s3), GET to Index(s3)),
+            ),
         )
     }
 }

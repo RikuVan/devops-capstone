@@ -1,6 +1,5 @@
 package dev.vancamp
 
-import com.sksamuel.hoplite.Pos.Companion.env
 import org.http4k.client.Java8HttpClient
 import org.http4k.cloudnative.env.Environment
 import org.http4k.cloudnative.env.EnvironmentKey
