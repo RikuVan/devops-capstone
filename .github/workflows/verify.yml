@@ -24,16 +24,7 @@ jobs:
         run: ./gradlew classes testClasses
       - name: Check Kotlin formatting rules (ktlint)
         id: ktlint
-        uses: musichin/ktlint-check@v2
-        with:
-          ktlint-version: '0.48.1'
-          level: 'warning'
-          reporter: |
-            plain,output=ktlint_report.txt
-            json,output=ktlint_report.json
-            patterns: |
-            **/**.kt
-            !**/generated/**
+        run: ./gradlew ktlint
       - name: Run tests
         id: test
         run: ./gradlew test
