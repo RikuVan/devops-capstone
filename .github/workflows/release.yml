@@ -38,7 +38,7 @@ jobs:
           HTTP_PORT: ${{ secrets.HTTP_PORT }}
         run: |
           docker build \
-            --build-arg AWS_BUCKET=$ \
+            --build-arg AWS_BUCKET=$AWS_BUCKET \
             --build-arg AWS_CREDENTIALS=$AWS_CREDENTIALS \
             --build-arg BASIC_AUTH_CREDENTIALS=$BASIC_AUTH_CREDENTIALS \
             --build-arg HTTP_PORT=$HTTP_PORT \
