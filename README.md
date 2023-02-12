@@ -11,6 +11,6 @@
 
 To create a new release, creating a new docker image to be deployed.
 
-1. Go to th8e new release page](https://github.com/RikuVan/devops-capstone/releases/new)
+1. Go to the [new release page](https://github.com/RikuVan/devops-capstone/releases/new)
 2. Create a version number and click "Generate release notes"
 3. Click "Publish release"
