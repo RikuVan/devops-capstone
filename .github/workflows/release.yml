@@ -56,9 +56,9 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+          ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          SECRET-KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REGION: us-east-2
       - name: Update kube config
         run: aws update-kubeconfig --region us-east-2 --name capstone
       - name: Deploy to EKS
