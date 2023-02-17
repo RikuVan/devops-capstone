@@ -6,7 +6,7 @@
 
 This is a simple app like dropbox that allows you to save files to a s3 bucket.
 
-<img src="images/app_via_ingress_endpoint.png" width="400" />
+<img src="images/5_app_via_ingress_endpoint.png" width="400" />
 
 This project practices the following devops:
 
