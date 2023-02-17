@@ -16,6 +16,7 @@ val HTTP_PORT = EnvironmentKey.int().defaulted("HTTP_PORT", 8000)
 
 fun main() {
     val env = Environment.ENV overrides Environment.fromResource("capstone.properties")
+    println(env.get("BASIC_AUTH_CREDENTIALS"))
 
     PrintRequest()
         .then(ServerFilters.BasicAuth("capstone", BASIC_AUTH_CREDENTIALS(env)))

@@ -11,9 +11,12 @@ This is a simple app like dropbox that allows you to save files to a s3 bucket.
 This project practices the following devops:
 
 - [x] Infrastructure as code using Terraform for kubernetes on AWS
-- [x] A CI pipeline using github actions to validate the build, with linting and tests
-- [x] A CD pipeline to deploy via github releases to EKS via images in dockerhub
+- [x] A CI pipeline using github actions to validate the build, with linting and tests as well as publishing of code coverage
+- [x] A CD pipeline to deploy via Github releases to EKS via images in dockerhub
+- [x] Release artifacts with changelogs
 - [x] Makefile to simplify local development
+
+Please see `images` for examples of the above.
 
 The application has been deployed to EKS but is only available via the ingress url.
 
