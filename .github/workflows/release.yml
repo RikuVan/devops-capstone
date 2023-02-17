@@ -48,3 +48,20 @@ jobs:
         run: |
           docker push $DOCKER_ACCOUNT/$PROJECT:$IMAGE_VERSION
           docker push $DOCKER_ACCOUNT/$PROJECT:latest
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: v1.26.0
+        id: install
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+      - name: Update kube config
+        run: aws update-kubeconfig --region us-east-2 --name capstone
+      - name: Deploy to EKS
+        run: |
+          kubectl apply -f infra/k8s/workloads.yml
+          kubectl apply -f infra/k8s/services.yml
