@@ -14,13 +14,14 @@ export AWS_CREDENTIALS=key:secret
 ## Getting started
 
 You can run a number of useful commands with `make`: 
-    - `env` to check your have the required environment set
-    - `test` and `lint`for validating the application
-    - `run` to run the app locally with gradle
-    - `docker-build`, `docker-run`, and `docker-remove` to create a docker image and run it
+    
+- `env` to check your have the required environment set
+- `test` and `lint`for validating the application
+- `run` to run the app locally with gradle
+- `docker-build`, `docker-run`, and `docker-remove` to create a docker image and run it
 
 
-## Release
+## Releasing a new version
 
 To create a new release, creating a new docker image to be deployed.
 
