@@ -28,3 +28,20 @@ To create a new release, creating a new docker image to be deployed.
 1. Go to the [new release page](https://github.com/RikuVan/devops-capstone/releases/new)
 2. Create a version number and click "Generate release notes"
 3. Click "Publish release"
+
+## Changing infra
+
+The infrastructure, the kubernetes cluster and s3 bucket, is created via [terraform](https://www.terraform.io/).
+
+To change deploy the infrastructure you must have terraform, kubectl and aws clis installed. Then run `aws configure` to set up the aws credentials.
+
+To apply changes to the infra:
+```bash
+terraform plan
+terraform apply
+```
+
+Then make changes to the applications with kubectl
+```bash
+kubectl apply -f ./infra/k8s/.
+```
