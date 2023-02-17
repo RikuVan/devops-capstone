@@ -8,6 +8,15 @@ This is a simple app like dropbox that allows you to save files to a s3 bucket.
 
 <img src="images/app_via_ingress_endpoint.png" width="400" />
 
+This project practices the following devops:
+
+- [x] Infrastructure as code using Terraform for kubernetes on AWS
+- [x] A CI pipeline using github actions to validate the build, with linting and tests
+- [x] A CD pipeline to deploy via github releases to EKS via images in dockerhub
+- [x] Makefile to simplify local development
+
+The application has been deployed to EKS but is only available via the ingress url.
+
 ## Prerequisites
 
 1. You must have AWS_CREDENTIALS env variable set to run the project locally. This includes the key and secret associated with the s3 bucket separated by a colon.
