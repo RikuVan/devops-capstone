@@ -2,6 +2,12 @@
 
 ![Build verified](https://github.com/rikuVan/devops-capstone/actions/workflows/verify.yml/badge.svg)
 
+## Project
+
+This is a simple app like dropbox that allows you to save files to a s3 bucket.
+
+![Capstone app](images/app_via_ingress_endpoint.png | width=400)
+
 ## Prerequisites
 
 1. You must have AWS_CREDENTIALS env variable set to run the project locally. This includes the key and secret associated with the s3 bucket separated by a colon.
