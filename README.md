@@ -2,10 +2,23 @@
 
 ![Build verified](https://github.com/rikuVan/devops-capstone/actions/workflows/verify.yml/badge.svg)
 
-## Package
+## Prerequisites
+
+1. You must have AWS_CREDENTIALS env variable set to run the project locally. This includes the key and secret associated with the s3 bucket separated by a colon.
 ```
-./gradlew distZip
+export AWS_CREDENTIALS=key:secret
 ```
+
+2. To develop locally you also need Java 17 SDK installed.
+
+## Getting started
+
+You can run a number of useful commands with `make`: 
+    - `env` to check your have the required environment set
+    - `test` and `lint`for validating the application
+    - `run` to run the app locally with gradle
+    - `docker-build`, `docker-run`, and `docker-remove` to create a docker image and run it
+
 
 ## Release
 
