@@ -1,20 +1,13 @@
-# Capstone
+# Devops capstone
 
 ![Build verified](https://github.com/rikuVan/devops-capstone/actions/workflows/verify.yml/badge.svg)
 
 ## Project
 
-This is a simple app like dropbox that allows you to save files to a s3 bucket.
+This is a simple app like dropbox (from the http4k examples) that allows you to save files to a s3 bucket.
 
 <img src="images/5_app_via_ingress_endpoint.png" width="400" />
 
-This project practices the following devops:
-
-- [x] Infrastructure as code using Terraform for kubernetes on AWS
-- [x] A CI pipeline using github actions to validate the build, with linting and tests as well as publishing of code coverage
-- [x] A CD pipeline to deploy via Github releases to EKS via images in dockerhub
-- [x] Release artifacts with changelogs
-- [x] Makefile to simplify local development
 
 Please see `images` for examples of the above.
 
